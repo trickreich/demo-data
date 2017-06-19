@@ -1,0 +1,8 @@
+{
+    "name": "sulu/sulu-demo-data",
+    "description": "Sulu demo data",
+    "license": "MIT",
+    "version": "1.6.0",
+    "type": "project",
+    "require": {}
+}
