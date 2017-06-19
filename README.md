@@ -1,6 +1,6 @@
 # Sulu - Demo Data
 
-This are the demo data for the official Sulu Demo.
+This is the data for the official Sulu Demo.
 
 To download and install the Sulu Demo have a look here:
 https://github.com/sulu/sulu-demo
