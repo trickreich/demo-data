@@ -2294,7 +2294,7 @@ CREATE TABLE `ro_routes` (
   `entity_class` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `entity_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `history` tinyint(1) NOT NULL,
-  `created` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `created` datetime NOT NULL,
   `changed` datetime NOT NULL,
   `idUsersCreator` int(11) DEFAULT NULL,
   `idUsersChanger` int(11) DEFAULT NULL,
@@ -2787,4 +2787,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-14 16:27:34
+-- Dump completed on 2017-06-20 10:48:00
