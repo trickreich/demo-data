@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.9, for osx10.9 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.37, for osx10.12 (x86_64)
 --
 -- Host: localhost    Database: sulu_demo
 -- ------------------------------------------------------
--- Server version	5.6.36
+-- Server version	5.6.37
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -158,6 +158,46 @@ CREATE TABLE `acl_security_identities` (
 LOCK TABLES `acl_security_identities` WRITE;
 /*!40000 ALTER TABLE `acl_security_identities` DISABLE KEYS */;
 /*!40000 ALTER TABLE `acl_security_identities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `au_task`
+--
+
+DROP TABLE IF EXISTS `au_task`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `au_task` (
+  `id` char(36) COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:guid)',
+  `task_id` char(36) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(DC2Type:guid)',
+  `entityClass` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `entityId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handlerClass` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `schedule` datetime NOT NULL,
+  `locale` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `scheme` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `host` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `changed` datetime NOT NULL,
+  `idUsersCreator` int(11) DEFAULT NULL,
+  `idUsersChanger` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_223B587EDBF11E1D` (`idUsersCreator`),
+  KEY `IDX_223B587E30D07CD5` (`idUsersChanger`),
+  KEY `IDX_223B587E8DB60186` (`task_id`),
+  CONSTRAINT `FK_223B587E30D07CD5` FOREIGN KEY (`idUsersChanger`) REFERENCES `se_users` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `FK_223B587E8DB60186` FOREIGN KEY (`task_id`) REFERENCES `ta_tasks` (`uuid`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `FK_223B587EDBF11E1D` FOREIGN KEY (`idUsersCreator`) REFERENCES `se_users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `au_task`
+--
+
+LOCK TABLES `au_task` WRITE;
+/*!40000 ALTER TABLE `au_task` DISABLE KEYS */;
+/*!40000 ALTER TABLE `au_task` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2435,7 +2475,7 @@ CREATE TABLE `se_permissions` (
   UNIQUE KEY `UNIQ_5CEC3EEAE25D857EC242628A1FA6DDA` (`context`,`module`,`idRoles`),
   KEY `IDX_5CEC3EEAA1FA6DDA` (`idRoles`),
   CONSTRAINT `FK_5CEC3EEAA1FA6DDA` FOREIGN KEY (`idRoles`) REFERENCES `se_roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2444,7 +2484,7 @@ CREATE TABLE `se_permissions` (
 
 LOCK TABLES `se_permissions` WRITE;
 /*!40000 ALTER TABLE `se_permissions` DISABLE KEYS */;
-INSERT INTO `se_permissions` VALUES (1,'sulu.contact.people',NULL,127,1),(2,'sulu.contact.organizations',NULL,127,1),(3,'sulu.media.collections',NULL,127,1),(4,'sulu.media.system_collections',NULL,127,1),(5,'sulu.security.roles',NULL,127,1),(6,'sulu.security.groups',NULL,127,1),(7,'sulu.security.users',NULL,127,1),(8,'sulu.settings.categories',NULL,127,1),(9,'sulu.settings.tags',NULL,127,1),(10,'sulu.global.snippets',NULL,127,1),(11,'sulu.webspace_settings.sulu_demo.default-snippets',NULL,127,1),(12,'sulu.webspace_settings.sulu_demo.analytics',NULL,127,1),(13,'sulu.webspace_settings.sulu_demo.custom-urls',NULL,127,1),(14,'sulu.webspaces.sulu_demo',NULL,127,1),(15,'sulu.contact.people',NULL,120,2),(16,'sulu.contact.organizations',NULL,120,2),(17,'sulu.media.collections',NULL,121,2),(18,'sulu.media.system_collections',NULL,64,2),(19,'sulu.security.roles',NULL,120,2),(20,'sulu.security.groups',NULL,120,2),(21,'sulu.security.users',NULL,120,2),(22,'sulu.settings.categories',NULL,120,2),(23,'sulu.settings.tags',NULL,120,2),(24,'sulu.global.snippets',NULL,120,2),(25,'sulu.webspace_settings.sulu_demo.default-snippets',NULL,80,2),(26,'sulu.webspace_settings.sulu_demo.analytics',NULL,120,2),(27,'sulu.webspace_settings.sulu_demo.custom-urls',NULL,120,2),(28,'sulu.webspaces.sulu_demo',NULL,123,2),(29,'sulu.modules.articles',NULL,122,2);
+INSERT INTO `se_permissions` VALUES (15,'sulu.contact.people',NULL,120,2),(16,'sulu.contact.organizations',NULL,120,2),(17,'sulu.media.collections',NULL,121,2),(18,'sulu.media.system_collections',NULL,64,2),(19,'sulu.security.roles',NULL,120,2),(20,'sulu.security.groups',NULL,120,2),(21,'sulu.security.users',NULL,120,2),(22,'sulu.settings.categories',NULL,120,2),(23,'sulu.settings.tags',NULL,120,2),(24,'sulu.global.snippets',NULL,120,2),(25,'sulu.webspace_settings.sulu_demo.default-snippets',NULL,80,2),(26,'sulu.webspace_settings.sulu_demo.analytics',NULL,120,2),(27,'sulu.webspace_settings.sulu_demo.custom-urls',NULL,120,2),(28,'sulu.webspaces.sulu_demo',NULL,123,2),(29,'sulu.modules.articles',NULL,122,2),(32,'sulu.automation.tasks',NULL,120,2);
 /*!40000 ALTER TABLE `se_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2510,7 +2550,7 @@ CREATE TABLE `se_roles` (
 
 LOCK TABLES `se_roles` WRITE;
 /*!40000 ALTER TABLE `se_roles` DISABLE KEYS */;
-INSERT INTO `se_roles` VALUES (1,'User','Sulu','2016-10-03 10:44:41','2016-10-03 10:44:41',NULL,NULL,NULL),(2,'Admin','Sulu','2016-10-19 14:02:02','2016-10-19 14:02:02',NULL,1,1);
+INSERT INTO `se_roles` VALUES (2,'Admin','Sulu','2016-10-19 14:02:02','2016-10-19 14:02:02',NULL,1,1);
 /*!40000 ALTER TABLE `se_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2592,7 +2632,7 @@ CREATE TABLE `se_user_roles` (
 
 LOCK TABLES `se_user_roles` WRITE;
 /*!40000 ALTER TABLE `se_user_roles` DISABLE KEYS */;
-INSERT INTO `se_user_roles` VALUES (2,'[\"en\",\"de\"]',1,2),(3,'[\"en\",\"de\"]',1,1),(4,'[\"en\",\"de\"]',2,1),(5,'[\"en\",\"de\"]',2,2);
+INSERT INTO `se_user_roles` VALUES (2,'[\"en\",\"de\"]',1,2),(5,'[\"en\",\"de\"]',2,2);
 /*!40000 ALTER TABLE `se_user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2700,6 +2740,72 @@ INSERT INTO `ta_tags` VALUES (1,'Way','2016-10-03 13:07:27','2016-10-03 13:07:27
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ta_task_executions`
+--
+
+DROP TABLE IF EXISTS `ta_task_executions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ta_task_executions` (
+  `uuid` char(36) COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:guid)',
+  `task_id` char(36) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(DC2Type:guid)',
+  `handler_class` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `workload` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:object)',
+  `duration` double DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `schedule_time` datetime NOT NULL,
+  `exception` longtext COLLATE utf8_unicode_ci,
+  `result` longtext COLLATE utf8_unicode_ci COMMENT '(DC2Type:object)',
+  `status` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `attempts` int(11) NOT NULL,
+  PRIMARY KEY (`uuid`),
+  KEY `IDX_1EB41368DB60186` (`task_id`),
+  KEY `IDX_1EB41368FDCB81E` (`schedule_time`),
+  CONSTRAINT `FK_1EB41368DB60186` FOREIGN KEY (`task_id`) REFERENCES `ta_tasks` (`uuid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ta_task_executions`
+--
+
+LOCK TABLES `ta_task_executions` WRITE;
+/*!40000 ALTER TABLE `ta_task_executions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ta_task_executions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ta_tasks`
+--
+
+DROP TABLE IF EXISTS `ta_tasks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ta_tasks` (
+  `uuid` char(36) COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:guid)',
+  `handler_class` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `interval_expression` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `first_execution` datetime DEFAULT NULL,
+  `last_execution` datetime DEFAULT NULL,
+  `system_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `workload` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:object)',
+  PRIMARY KEY (`uuid`),
+  UNIQUE KEY `UNIQ_B5B2FFA47280172` (`system_key`),
+  KEY `IDX_B5B2FFAD17F50A6` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ta_tasks`
+--
+
+LOCK TABLES `ta_tasks` WRITE;
+/*!40000 ALTER TABLE `ta_tasks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ta_tasks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `we_analytics`
 --
 
@@ -2793,4 +2899,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-30 10:27:32
+-- Dump completed on 2017-09-28 10:58:24
