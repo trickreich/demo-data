@@ -1710,7 +1710,7 @@ CREATE TABLE `me_collections` (
 
 LOCK TABLES `me_collections` WRITE;
 /*!40000 ALTER TABLE `me_collections` DISABLE KEYS */;
-INSERT INTO `me_collections` VALUES (1,NULL,1,12,0,'system_collections','2016-10-03 10:44:41','2016-10-03 10:44:41',2,NULL,NULL,1,NULL),(2,NULL,2,5,1,'sulu_media','2016-10-03 10:44:41','2017-06-27 14:39:52',2,NULL,2,2,1),(3,NULL,3,4,2,'sulu_media.preview_image','2016-10-03 10:44:42','2017-06-27 14:39:52',2,NULL,2,4,2),(4,NULL,6,11,1,'sulu_contact','2016-10-03 10:44:42','2017-06-27 14:39:52',2,NULL,2,6,1),(5,NULL,7,8,2,'sulu_contact.contact','2016-10-03 10:44:42','2017-06-27 14:39:52',2,NULL,2,8,4),(6,NULL,9,10,2,'sulu_contact.account','2016-10-03 10:44:42','2017-06-27 14:39:52',2,NULL,2,10,4),(7,NULL,13,14,0,NULL,'2016-10-03 11:20:02','2016-10-03 11:20:02',1,1,1,12,NULL),(8,NULL,15,16,0,NULL,'2016-10-10 14:48:50','2016-10-10 14:48:50',1,1,1,13,NULL),(9,NULL,17,18,0,NULL,'2016-10-10 16:04:49','2016-10-10 16:04:49',1,1,1,14,NULL),(10,NULL,19,20,0,NULL,'2016-10-11 10:35:15','2016-10-11 10:35:15',1,1,1,15,NULL),(11,NULL,21,22,0,NULL,'2016-10-11 10:50:47','2016-10-11 10:50:47',1,1,1,16,NULL),(12,NULL,23,24,0,NULL,'2016-10-13 09:31:32','2016-10-13 09:31:32',1,1,1,17,NULL),(13,NULL,25,26,0,NULL,'2016-10-17 09:57:50','2016-10-17 09:57:50',1,1,1,18,NULL),(14,NULL,27,28,0,NULL,'2016-10-20 10:52:40','2016-10-20 10:52:40',1,1,1,19,NULL),(15,NULL,29,30,0,NULL,'2016-10-20 14:19:14','2016-10-20 14:19:14',1,1,1,20,NULL);
+INSERT INTO `me_collections` VALUES (1,NULL,1,12,0,'system_collections','2016-10-03 10:44:41','2016-10-03 10:44:41',2,NULL,NULL,1,NULL),(2,NULL,2,5,1,'sulu_media','2016-10-03 10:44:41','2017-09-28 11:20:58',2,NULL,1,2,1),(3,NULL,3,4,2,'sulu_media.preview_image','2016-10-03 10:44:42','2017-09-28 11:20:58',2,NULL,1,4,2),(4,NULL,6,11,1,'sulu_contact','2016-10-03 10:44:42','2017-09-28 11:20:58',2,NULL,1,6,1),(5,NULL,7,8,2,'sulu_contact.contact','2016-10-03 10:44:42','2017-09-28 11:20:58',2,NULL,1,8,4),(6,NULL,9,10,2,'sulu_contact.account','2016-10-03 10:44:42','2017-09-28 11:20:58',2,NULL,1,10,4),(7,NULL,13,14,0,NULL,'2016-10-03 11:20:02','2016-10-03 11:20:02',1,1,1,12,NULL),(8,NULL,15,16,0,NULL,'2016-10-10 14:48:50','2016-10-10 14:48:50',1,1,1,13,NULL),(9,NULL,17,18,0,NULL,'2016-10-10 16:04:49','2016-10-10 16:04:49',1,1,1,14,NULL),(10,NULL,19,20,0,NULL,'2016-10-11 10:35:15','2016-10-11 10:35:15',1,1,1,15,NULL),(11,NULL,21,22,0,NULL,'2016-10-11 10:50:47','2016-10-11 10:50:47',1,1,1,16,NULL),(12,NULL,23,24,0,NULL,'2016-10-13 09:31:32','2016-10-13 09:31:32',1,1,1,17,NULL),(13,NULL,25,26,0,NULL,'2016-10-17 09:57:50','2016-10-17 09:57:50',1,1,1,18,NULL),(14,NULL,27,28,0,NULL,'2016-10-20 10:52:40','2016-10-20 10:52:40',1,1,1,19,NULL),(15,NULL,29,30,0,NULL,'2016-10-20 14:19:14','2016-10-20 14:19:14',1,1,1,20,NULL);
 /*!40000 ALTER TABLE `me_collections` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1839,7 +1839,7 @@ CREATE TABLE `me_file_version_tags` (
   PRIMARY KEY (`idFileVersions`,`idTags`),
   KEY `IDX_150A30BE911ADE33` (`idFileVersions`),
   KEY `IDX_150A30BE1C41CAB8` (`idTags`),
-  CONSTRAINT `FK_150A30BE1C41CAB8` FOREIGN KEY (`idTags`) REFERENCES `ta_tags` (`id`),
+  CONSTRAINT `FK_150A30BE1C41CAB8` FOREIGN KEY (`idTags`) REFERENCES `ta_tags` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_150A30BE911ADE33` FOREIGN KEY (`idFileVersions`) REFERENCES `me_file_versions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2323,6 +2323,42 @@ INSERT INTO `phpcr_workspaces` VALUES ('default'),('default_live');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `re_redirect_routes`
+--
+
+DROP TABLE IF EXISTS `re_redirect_routes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `re_redirect_routes` (
+  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `statusCode` int(11) NOT NULL,
+  `source` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `target` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `changed` datetime NOT NULL,
+  `idUsersCreator` int(11) DEFAULT NULL,
+  `idUsersChanger` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_3DB4B4315F8A7F73` (`source`),
+  KEY `IDX_3DB4B431DBF11E1D` (`idUsersCreator`),
+  KEY `IDX_3DB4B43130D07CD5` (`idUsersChanger`),
+  CONSTRAINT `FK_3DB4B43130D07CD5` FOREIGN KEY (`idUsersChanger`) REFERENCES `se_users` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `FK_3DB4B431DBF11E1D` FOREIGN KEY (`idUsersCreator`) REFERENCES `se_users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `re_redirect_routes`
+--
+
+LOCK TABLES `re_redirect_routes` WRITE;
+/*!40000 ALTER TABLE `re_redirect_routes` DISABLE KEYS */;
+INSERT INTO `re_redirect_routes` VALUES ('1cb4865e-eda9-4884-b87e-e0ca853ffcfe',1,301,'/index.html','/','2017-09-28 11:25:34','2017-09-28 11:25:34',1,1),('c6c41d3e-4e30-4fad-99ee-2218a0523ca3',1,301,'/sulu','http://www.sulu.io','2017-09-28 11:26:29','2017-09-28 11:26:29',1,1);
+/*!40000 ALTER TABLE `re_redirect_routes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ro_routes`
 --
 
@@ -2475,7 +2511,7 @@ CREATE TABLE `se_permissions` (
   UNIQUE KEY `UNIQ_5CEC3EEAE25D857EC242628A1FA6DDA` (`context`,`module`,`idRoles`),
   KEY `IDX_5CEC3EEAA1FA6DDA` (`idRoles`),
   CONSTRAINT `FK_5CEC3EEAA1FA6DDA` FOREIGN KEY (`idRoles`) REFERENCES `se_roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2484,7 +2520,7 @@ CREATE TABLE `se_permissions` (
 
 LOCK TABLES `se_permissions` WRITE;
 /*!40000 ALTER TABLE `se_permissions` DISABLE KEYS */;
-INSERT INTO `se_permissions` VALUES (15,'sulu.contact.people',NULL,120,2),(16,'sulu.contact.organizations',NULL,120,2),(17,'sulu.media.collections',NULL,121,2),(18,'sulu.media.system_collections',NULL,64,2),(19,'sulu.security.roles',NULL,120,2),(20,'sulu.security.groups',NULL,120,2),(21,'sulu.security.users',NULL,120,2),(22,'sulu.settings.categories',NULL,120,2),(23,'sulu.settings.tags',NULL,120,2),(24,'sulu.global.snippets',NULL,120,2),(25,'sulu.webspace_settings.sulu_demo.default-snippets',NULL,80,2),(26,'sulu.webspace_settings.sulu_demo.analytics',NULL,120,2),(27,'sulu.webspace_settings.sulu_demo.custom-urls',NULL,120,2),(28,'sulu.webspaces.sulu_demo',NULL,123,2),(29,'sulu.modules.articles',NULL,122,2),(32,'sulu.automation.tasks',NULL,120,2);
+INSERT INTO `se_permissions` VALUES (15,'sulu.contact.people',NULL,120,2),(16,'sulu.contact.organizations',NULL,120,2),(17,'sulu.media.collections',NULL,121,2),(18,'sulu.media.system_collections',NULL,64,2),(19,'sulu.security.roles',NULL,120,2),(20,'sulu.security.groups',NULL,120,2),(21,'sulu.security.users',NULL,120,2),(22,'sulu.settings.categories',NULL,120,2),(23,'sulu.settings.tags',NULL,120,2),(24,'sulu.global.snippets',NULL,120,2),(25,'sulu.webspace_settings.sulu_demo.default-snippets',NULL,80,2),(26,'sulu.webspace_settings.sulu_demo.analytics',NULL,120,2),(27,'sulu.webspace_settings.sulu_demo.custom-urls',NULL,120,2),(28,'sulu.webspaces.sulu_demo',NULL,123,2),(29,'sulu.modules.articles',NULL,122,2),(32,'sulu.automation.tasks',NULL,120,2),(33,'sulu.modules.redirects',NULL,64,2);
 /*!40000 ALTER TABLE `se_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2899,4 +2935,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-28 10:58:24
+-- Dump completed on 2017-09-28 11:26:45
