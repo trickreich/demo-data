@@ -3150,7 +3150,7 @@ CREATE TABLE `we_domains` (
 
 LOCK TABLES `we_domains` WRITE;
 /*!40000 ALTER TABLE `we_domains` DISABLE KEYS */;
-INSERT INTO `we_domains` VALUES (1,'{host}/{localization}','dev');
+INSERT INTO `we_domains` VALUES (1,'{host}/{localization}','prod');
 /*!40000 ALTER TABLE `we_domains` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
